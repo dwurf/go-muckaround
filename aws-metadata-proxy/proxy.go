@@ -15,7 +15,10 @@ func main() {
 
 // Get instance metadata and write to client
 func InstanceIdentity(w http.ResponseWriter, r *http.Request) {
-	// Fetch instance metadata
+	// Fetch instance metadata - restricted to just this endpoint for security reasons
+	// https://ejj.io/blog/capital-one
+	// Even this document leaks more info about your instance than you really should so
+	// don't run this code for anything other than a quick test.
 	resp, err := http.Get("http://169.254.169.254/latest/dynamic/instance-identity/document")
 	if err != nil {
 		_, err := fmt.Fprintf(w, "Error: %+v", err)
